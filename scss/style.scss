@@ -1,0 +1,256 @@
+/* Ensure smooth scrolling and fade effect */
+html {
+  scroll-behavior: smooth;
+}
+
+body.page {
+  font-family: sans-serif;
+  background: $bg;
+  color: $text;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.page-transition {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+/* For when the page loads, we remove the transition */
+body.page-loaded {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: $nav-bg;
+  color: $text;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, outline 0.3s ease;
+
+  &:focus {
+    outline: 2px solid $accent;
+  }
+
+  &:hover {
+    box-shadow: 0 0 8px #38bdf8;  /* Light blue glow on hover */
+    outline: none;  /* Removes the default outline */
+  }
+}
+
+
+.profile-img {
+  width: 200px;
+  height: 200px;
+  background: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out, box-shadow 0.3s ease;
+  perspective: 1000px;  /* Adds depth for the 3D flip */
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease-in-out;
+    transform-style: preserve-3d;  /* Keeps the 3D effect */
+  }
+
+  &:hover {
+    transform: rotateY(180deg);  /* Flip effect on hover */
+    box-shadow: 0px 10px 15px rgba(225, 224, 224, 0.3);  /* Shadow on hover */
+  }
+
+  &:hover img {
+    transform: rotateY(180deg);  /* Rotate image on hover */
+  }
+}
+
+
+.arrow-btn {
+  margin-top: 2rem;  /* Space between image and button */
+  font-size: 2rem;
+  margin-left: 13rem;
+  display: inline-block;
+  background-color: whitesmoke;  /* New background color for the button */
+  color: $bg;  /* Text color for the button (matches background) */
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 40%;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    background-color: $btn-hover-bg;  /* Hover background color */
+    transform: translateX(5px);  /* Move the arrow to the right on hover */
+    box-shadow: 0px 4px 6px $btn-shadow;  /* Shadow on hover */
+  }
+
+  &:active {
+    transform: translateX(2px);  /* Pressed effect when clicked */
+  }
+}
+
+
+nav a {
+  margin-left: 1.5rem;
+  color: $text;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.2rem;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: $accent;  /* Accent color on hover */
+  }
+}
+
+
+.about-section {
+  // flex: 1;
+  // display: flex;
+  // flex-direction: column; // Ensures that the cards are stacked vertically
+  align-items: center;
+  padding: 2rem;
+  background-color: $bg;
+  min-height: calc(100vh - 80px); // Adjust height considering header
+  gap: 2rem;  // Adds space between the cards
+}
+
+.about-card {
+  background-color: $nav-bg;
+  padding: 2.5rem 3rem;
+  border-radius: 1rem;
+  text-align: center;
+  color: $text;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  h2 {
+    color: $accent;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+
+  pre{
+    color: #38bdf8;
+    font-size: 20px;
+  }
+
+  &:hover {
+    background-color: #334155;
+    transform: translateY(-6px);
+  }
+}
+
+/* Animation keyframes for sliding in */
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+body.page {
+  animation: slideInFromLeft 0.1s ease-out;
+}
+
+.home-layout {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 3rem;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  background-color: $bg;
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Personal Info Card */
+.info-card {
+  background-color: $nav-bg;
+  padding: 2.5rem 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  color: $text;
+  width: 300px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+
+  h2 {
+    color: $accent;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+  }
+
+  &:hover {
+    background-color: #334155;
+    transform: translateY(-5px);
+  }
+}
+
+/* Basic reset for page transitions */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Style for page load transition */
+.page {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 1;
+  transform: translateX(0); /* Default position */
+}
+
+/* When transitioning between pages */
+.page-transition {
+  opacity: 0;
+  transform: translateX(100%); /* Slide to the right on transition */
+}
+
+/* Keyframe for sliding in from the left (or any direction) */
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%); /* Starts off the screen to the left */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Triggered when the page loads */
+body.page-loaded {
+  animation: slideInFromLeft 1s ease-out; /* You can change the animation duration */
+}
